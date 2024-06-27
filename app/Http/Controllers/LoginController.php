@@ -37,7 +37,8 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($data)) {
-            return redirect('/home')->with('success', 'Selamat Datang');
+            $user = Auth::user();
+            return redirect('/home')->with('success', 'Selamat Datang ' . $user->name);
         } else {
             return redirect('/login')->withErrors(['email' => 'Email atau password salah']);
         }
@@ -150,44 +151,46 @@ class LoginController extends Controller
     {
         return Socialite::driver($provider)->redirect();
     }
+
+
     public function handleProvideCallback($provider)
     {
         try {
             $socialUser = Socialite::driver($provider)->user();
         } catch (Exception $e) {
-            // Handle exception
             return redirect('/login')->withErrors(['error' => 'Gagal login dengan ' . ucfirst($provider)]);
         }
-
+    
         // Cari atau buat pengguna berdasarkan data dari $socialUser
         $socialAccount = SocialAccount::where('provider_id', $socialUser->getId())
             ->where('provider_name', $provider)
             ->first();
-
+    
         if ($socialAccount) {
             // Jika akun sosial sudah ada, ambil pengguna terkait
             $authUser = $socialAccount->user;
         } else {
             // Jika akun sosial belum ada, cari pengguna berdasarkan email
             $authUser = User::where('email', $socialUser->getEmail())->first();
-
+    
             if (!$authUser) {
                 // Jika pengguna tidak ditemukan, buat pengguna baru
                 $authUser = User::create([
                     'name' => $socialUser->getName(),
-                    'email' => $socialUser->getEmail()
+                    'email' => $socialUser->getEmail(),
+                    'email_verified_at' => now(),
                 ]);
             }
-
+    
             // Buat akun sosial baru terkait dengan pengguna
             $authUser->socialAccounts()->create([
                 'provider_id' => $socialUser->getId(),
                 'provider_name' => $provider
             ]);
         }
-        
-        Auth::login($authUser, true);
 
+        Auth::login($authUser, true);
+    
         return redirect()->intended('/home');
     }
 

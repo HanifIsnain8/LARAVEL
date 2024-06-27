@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'email_verified_at',
     ];
 
     /**
@@ -50,4 +51,14 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(SocialAccount::class);
     }
+
+    // public function Kriteria(){
+    //     return $this->hasMany(Kriteria::class);
+
+    // }
+
+    // public function Alternatif(){
+    //     return $this->hasMany(Alternatif::class);
+
+    // }
 }

@@ -21,7 +21,7 @@ class Alternatif extends Model
         'asal_kampus',
     ];
 
-    public function nilais()
+    public function nilai()
     {
         return $this->hasMany(Nilai::class);
     }

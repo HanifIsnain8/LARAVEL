@@ -12,7 +12,7 @@ class KriteriaController extends Controller
     {
         $userId = auth()->id();
         $kriterias = Kriteria::where('user_id', $userId)
-                         ->with('subsKriterias')
+                         ->with('subsKriteria')
                          ->get();
         return view('kriteria.index', compact('kriterias'));
     }
@@ -31,7 +31,7 @@ class KriteriaController extends Controller
 
         if ($kriteria->save()) {
 
-            $subKriterias = [
+            $subKriteria = [
                 ['nama' => 'sangat buruk', 'nilai' => 1],
                 ['nama' => 'buruk', 'nilai' => 2],
                 ['nama' => 'cukup', 'nilai' => 3],
@@ -39,7 +39,7 @@ class KriteriaController extends Controller
                 ['nama' => 'sangat baik', 'nilai' => 5],
             ];
     
-            foreach ($subKriterias as $sub) {
+            foreach ($subKriteria as $sub) {
                 Subs_kriteria::create([
                     'user_id' => $request->user_id,
                     'kriteria_id' => $kriteria->id,
@@ -90,7 +90,7 @@ class KriteriaController extends Controller
         $subs_nama = $request->input('subs_nama');
 
 
-        foreach ($kriteria->subsKriterias as $index => $subKriteria) {
+        foreach ($kriteria->subsKriteria as $index => $subKriteria) {
 
             $subKriteria->nama = $subs_nama[$index];
             $subKriteria->save();

@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', 'Kriteria')
+
 @section('content')
 <div class="content-wrapper">
     <section class="content">
@@ -18,7 +20,7 @@
                             </div>
                         </div>
                         <div class="card-body table-responsive p-0">
-                            <table id="kriteriaTable" class="table table-hover text-nowrap">
+                            <table id="kriteriaTable" class="table table-hover text-center">
                                 <thead>
                                     <tr>
                                         <th>NO</th>
@@ -42,7 +44,7 @@
                                                 <i class="fas fa-list"></i> SUBS KRITERIA
                                             </button>
                                             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editModal{{ $kriteria->id }}">
-                                                <i class="fas fa-pen"></i> Edit
+                                                <i class="fas fa-edit"></i> Edit
                                             </button>
                                             <form action="{{ route('kriteria.destroy', $kriteria->id) }}" method="POST" style="display: inline-block;">
                                                 @csrf
@@ -167,7 +169,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    @foreach($kriteria->subsKriterias as $sub)
+                    @foreach($kriteria->subsKriteria as $sub)
                     <div class="form-group">
                         <label for="subs_nama[]_{{ $sub->id }}">Nilai {{ $sub->nilai }}:</label>
                         <input type="text" class="form-control" name="subs_nama[]" value="{{ $sub->nama }}" required>

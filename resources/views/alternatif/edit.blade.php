@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', 'Edit Mahasiswa')
+
 @section('content')
 <div class="content-wrapper">
     <section class="content">

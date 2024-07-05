@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', 'Mahasiswa')
+
 @section('content')
 <div class="content-wrapper">
     {{-- Uncomment this section if you want to display the content header --}}
@@ -35,7 +37,7 @@
                             </div>
                         </div>
                         <div class="card-body table-responsive p-0">
-                            <table id="alternatifTable" class="table table-hover text-nowrap">
+                            <table id="alternatifTable" class="table table-hover text-center">
                                 <thead>
                                     <tr>
                                         <th>NO</th>
@@ -55,12 +57,14 @@
                                             <td>{{ $alt->jurusan }}</td>
                                             <td>{{ $alt->asal_kampus }}</td>
                                             <td>
-                                                {{-- Add action buttons such as edit and delete here --}}
-                                                <a href="{{ route('alternatif.edit', $alt->id) }}" class="btn btn-warning">Edit</a>
+                                                <a href="{{ route('alternatif.edit', $alt->id) }}" class="btn btn-warning">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
                                                 <form action="{{ route('alternatif.destroy', $alt->id) }}" method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="fas fa-trash-alt"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -41,6 +41,13 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{ route ('hasil') }}" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+              <p>HASIL</p>
+            </a>
+          </li>
+
 
         </ul>
       </nav>

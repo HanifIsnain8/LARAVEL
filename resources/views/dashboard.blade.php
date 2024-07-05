@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@section('title', 'Home')
+
 @section('content')
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">

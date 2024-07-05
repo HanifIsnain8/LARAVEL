@@ -17,12 +17,12 @@ class Kriteria extends Model
         'tipe_kriteria',
     ];
 
-    public function subsKriterias()
+    public function subsKriteria()
     {
         return $this->hasMany(Subs_kriteria::class);
     }
 
-    public function nilais()
+    public function nilai()
     {
         return $this->hasMany(Nilai::class);
     }

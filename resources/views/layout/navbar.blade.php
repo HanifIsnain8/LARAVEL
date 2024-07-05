@@ -1,5 +1,5 @@
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -22,7 +22,7 @@
           
             <p>
               {{ Auth::user()->name }} - {{ Auth::user()->occupation }}
-              <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
+              <small>Bergabung Sejak {{ Auth::user()->created_at->format('M. Y') }}</small>
             </p>
           </li>
           <li class="user-footer">

@@ -22,7 +22,7 @@ class Subs_kriteria extends Model
         return $this->belongsTo(Kriteria::class);
     }
 
-    public function nilais()
+    public function nilai()
     {
         return $this->hasMany(Nilai::class);
     }

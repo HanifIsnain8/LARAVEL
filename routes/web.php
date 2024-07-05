@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 route::get('/', function(){
-    return redirect('/login');
+    return view('layout.welcome');
 });
 
 
@@ -51,6 +51,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/kriteria/{id}/update-subs', [KriteriaController::class, 'updateSubs'])->name('subs_kriteria.update');
     Route::resource('alternatif', AlternatifController::class);
     Route::resource('nilai', NilaiController::class);
+    Route::get('hasil',[NilaiController::class, 'hasil'])->name('hasil');
 });
 
 

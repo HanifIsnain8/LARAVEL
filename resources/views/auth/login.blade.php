@@ -16,10 +16,10 @@
   <div class="login-box">
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="{{ route('login') }}" class="h1"><b>SPK</b></a>
+        <a href="{{ route('login') }}" class="h1"><b>MagangPlus</b></a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
+        <p class="login-box-msg">Login Untuk Memulai</p>
 
         <form action="{{ route('login-proses') }}" method="post">
           @csrf

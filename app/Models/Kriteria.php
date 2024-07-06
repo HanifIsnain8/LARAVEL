@@ -19,7 +19,7 @@ class Kriteria extends Model
 
     public function subsKriteria()
     {
-        return $this->hasMany(Subs_kriteria::class);
+        return $this->hasMany(Subs_kriteria::class, 'kriteria_id');
     }
 
     public function nilai()

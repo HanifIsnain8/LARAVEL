@@ -19,7 +19,7 @@ class Subs_kriteria extends Model
     
     public function kriteria()
     {
-        return $this->belongsTo(Kriteria::class);
+        return $this->belongsTo(Kriteria::class, 'kriteria_id');
     }
 
     public function nilai()

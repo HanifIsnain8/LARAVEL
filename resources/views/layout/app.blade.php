@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="{{ url('AdminLTE/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ url('AdminLTE/dist/css/adminlte.min.css') }}">
+  @yield('css')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
   <!-- Site wrapper -->
@@ -30,6 +31,7 @@
   <script src="{{ url('AdminLTE/dist/js/adminlte.min.js') }}"></script>
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  @yield('scripts')
 
 
   @if ($message = Session::get('success'))

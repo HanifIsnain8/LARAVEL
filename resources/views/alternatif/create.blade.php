@@ -13,6 +13,9 @@
                     <div class="card card-primary"">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center mb">
+                                <a class="btn btn-success" type="button" value="kembali" onclick="history.go(-1)">
+                                    KEMBALI
+                                </a>
                                 <div class="mx-auto text-center">
                                     <h2>TAMBAH MAHASISWA</h2>
                                 </div>

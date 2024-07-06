@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 route::get('/', function(){
-    return view('layout.welcome');
+    return view('layout.landing');
 });
 
 

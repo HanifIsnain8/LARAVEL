@@ -12,6 +12,9 @@
                     <div class="card card-primary">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center mb">
+                                <a class="btn btn-success" type="button" value="kembali" onclick="history.go(-1)">
+                                    KEMBALI
+                                </a>
                                 <div class="mx-auto text-center">
                                     <h2>TAMBAH NILAI</h2>
                                 </div>
@@ -32,7 +35,7 @@
                                     <div class="form-group">
                                         <label for="subs_kriteria_{{ $kriteria->id }}">{{ $kriteria->nama }}</label>
                                         <select name="subs_kriterias[{{ $kriteria->id }}]" id="subs_kriteria_{{ $kriteria->id }}" class="form-control" required>
-                                            @foreach($kriteria->subsKriterias as $subs_kriteria)
+                                            @foreach($kriteria->subsKriteria as $subs_kriteria)
                                                 <option value="{{ $subs_kriteria->id }}">{{ $subs_kriteria->nama }}</option>
                                             @endforeach
                                         </select>

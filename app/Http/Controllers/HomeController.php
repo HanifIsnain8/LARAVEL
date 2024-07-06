@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alternatif;
+use App\Models\Kriteria;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +13,9 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('dashboard');
+        $alt = Alternatif::where('user_id', Auth::id())->count();
+        $kri = Kriteria::where('user_id', Auth::id())->count();
+        return view('dashboard', compact('alt', 'kri'));
     }
 
     public function profile()

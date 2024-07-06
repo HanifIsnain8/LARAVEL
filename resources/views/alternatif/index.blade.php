@@ -1,26 +1,13 @@
 @extends('layout.app')
-
 @section('title', 'Mahasiswa')
+@section('css')
+    <link rel="stylesheet" href="AdminLTE/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="AdminLTE/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="AdminLTE/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+@endsection
 
 @section('content')
 <div class="content-wrapper">
-    {{-- Uncomment this section if you want to display the content header --}}
-    {{-- <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>ALTERNATIF</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Legacy User Menu</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-    </section> --}}
-    
     <section class="content">
         <div class="container-fluid" style="padding-top: 20px;">
             <div class="row">
@@ -36,8 +23,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="card-body table-responsive p-0">
-                            <table id="alternatifTable" class="table table-hover text-center">
+                        <div class="card-body">
+                            <table id="alternatifTable" class="table table-bordered  table-hover text-center">
                                 <thead>
                                     <tr>
                                         <th>NO</th>
@@ -49,26 +36,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($alternatif as $alt)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $alt->nama }}</td>
-                                            <td>{{ $alt->semester }}</td>
-                                            <td>{{ $alt->jurusan }}</td>
-                                            <td>{{ $alt->asal_kampus }}</td>
-                                            <td>
-                                                <a href="{{ route('alternatif.edit', $alt->id) }}" class="btn btn-warning">
-                                                    <i class="fas fa-edit"></i> Edit
-                                                </a>
-                                                <form action="{{ route('alternatif.destroy', $alt->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="fas fa-trash-alt"></i> Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    {{-- Data akan dimuat oleh DataTables --}}
                                 </tbody>
                             </table>
                         </div>
@@ -78,4 +46,31 @@
         </div>
     </section>
 </div>
-@endsection   
+@endsection
+
+@section('scripts')
+    <script src="AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="AdminLTE/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="AdminLTE/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#alternatifTable').DataTable({
+                serverSide:true,
+                ajax: {
+                    url: "{{ route('alternatif.index') }}",
+                },
+                columns: [
+                    { data: 'no', name: 'no' },
+                    { data: 'nama', name: 'nama' },
+                    { data: 'semester', name: 'semester' },
+                    { data: 'jurusan', name: 'jurusan' },
+                    { data: 'asal_kampus', name: 'asal_kampus' },
+                    { data: 'aksi', name: 'aksi', orderable: false, searchable: false },
+                ],
+            });
+        });
+    </script>
+@endsection

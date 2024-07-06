@@ -24,8 +24,8 @@ class NilaiController extends Controller
     }
     
     public function create(){
-        $alternatifs = Alternatif::all();
-        $kriterias = Kriteria::with('subsKriterias')->get();
+        $alternatifs = Alternatif::whereDoesntHave('nilai')->get();
+        $kriterias = Kriteria::with('subsKriteria')->get();
 
         return view('nilai.create', compact('alternatifs', 'kriterias'));
     }
@@ -51,39 +51,37 @@ class NilaiController extends Controller
     }
 
     public function edit($id){
-        $nilai = Nilai::with(['kriteria', 'subsKriteria'])->findOrFail($id);
-        $alternatifs = Alternatif::all();
-        $kriterias = Kriteria::with('subsKriteria')->get();
+        $nilai = Nilai::where('alternatif_id', $id)->get();
+        $alternatif = Alternatif::all();
+        $kriteria = Kriteria::with('subsKriteria')->get();
+        
+    
+        return view('nilai.edit', compact('nilai', 'alternatif', 'kriteria'));
+    }
     
 
-        return view('nilai.edit', compact('nilai', 'alternatifs', 'kriterias'));
-    }
-
-    public function update(Request $request, $alternatif_id){
+    public function update(Request $request, $id){
+        // Validasi input jika perlu
         $request->validate([
-            'nilai' => 'required|array',
-            'nilai.*' => 'required|integer',
+            'alternatif_id' => 'required',
+            'penilaian.*.kriteria_id' => 'required',
+            'penilaian.*.subs_kriteria_id' => 'required',
         ]);
-
-        $userId = auth()->id();
-        
-        foreach ($request->nilai as $kriteria_id => $nilai) {
-            $nilaiModel = Nilai::where('user_id', $userId)
-                               ->where('alternatif_id', $alternatif_id)
-                               ->where('kriteria_id', $kriteria_id)
-                               ->first();
-            if ($nilaiModel) {
-                $nilaiModel->update(['nilai' => $nilai]);
-            } else {
-                Nilai::create([
-                    'user_id' => $userId,
-                    'alternatif_id' => $alternatif_id,
-                    'kriteria_id' => $kriteria_id,
-                    'nilai' => $nilai,
-                ]);
-            }
+    
+        // Hapus nilai yang ada untuk alternatif ini
+        Nilai::where('alternatif_id', $id)->delete();
+    
+        // Simpan nilai baru
+        foreach ($request->penilaian as $penilaian) {
+            Nilai::create([
+                'user_id' => auth()->id(),
+                'alternatif_id' => $request->alternatif_id,
+                'kriteria_id' => $penilaian['kriteria_id'],
+                'subs_kriteria_id' => $penilaian['subs_kriteria_id'],
+                'nilai' => Subs_Kriteria::find($penilaian['subs_kriteria_id'])->nilai,
+            ]);
         }
-
+    
         return redirect()->route('nilai.index')->with('success', 'Nilai berhasil diperbarui.');
     }
 

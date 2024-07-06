@@ -10,9 +10,44 @@ use Yajra\DataTables\Facades\DataTables;
 class AlternatifController extends Controller
 {
     public function index(Request $request)
-    {
-        $alternatif = Alternatif::where('user_id', Auth::id())->get();
-        return view('alternatif.index',compact('alternatif'));
+    {   
+        if ($request->ajax()) {
+            $alternatif = Alternatif::where('user_id', Auth::id())->latest()->get();
+    
+            return DataTables::of($alternatif)
+                ->addColumn('no', function ($data) {
+                    return $data->id; // atau bisa diganti dengan nomor urut lainnya
+                })
+                ->addColumn('nama', function ($data) {
+                    return $data->nama;
+                })
+                ->addColumn('semester', function ($data) {
+                    return $data->semester;
+                })
+                ->addColumn('jurusan', function ($data) {
+                    return $data->jurusan;
+                })
+                ->addColumn('asal_kampus', function ($data) {
+                    return $data->asal_kampus;
+                })
+                ->addColumn('aksi', function ($data) {
+                    return '
+                        <a href="' . route('alternatif.edit', $data->id) . '" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form action="' . route('alternatif.destroy', $data->id) . '" method="POST" style="display:inline;">
+                            ' . csrf_field() . '
+                            ' . method_field('DELETE') . '
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        </form>
+                    ';
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        }
+        return view('alternatif.index',compact('request'));
     }
 
     public function create(){

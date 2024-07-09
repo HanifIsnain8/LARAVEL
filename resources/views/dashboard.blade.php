@@ -34,7 +34,7 @@
             <div class="inner">
               <h3>{{ $alt }}</h3>
 
-              <p>Data Alternatif</p>
+              <p>Data Mahasiswa</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -62,7 +62,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>44</h3>
+              <h3>{{ $nilai }}</h3>
 
               <p>Data penilaian</p>
             </div>
@@ -75,6 +75,34 @@
         <!-- ./col -->
       </div>
     </section>
+    <!-- Panduan Section -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Panduan Penggunaan</h2>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <h5>1. Mengelola Data Mahasiswa</h5>
+              <p>Untuk mengelola data Mahasiswa, klik tombol "More info" pada bagian Data Alternatif. Anda akan diarahkan ke halaman pengelolaan data alternatif di mana Anda bisa menambahkan, mengedit, atau menghapus data alternatif.</p>
+              
+              <h5>2. Mengelola Data Kriteria</h5>
+              <p>Untuk mengelola data alternatif, klik tombol "More info" pada bagian Data Alternatif. Anda akan diarahkan ke halaman pengelolaan data alternatif di mana Anda bisa menambahkan, mengedit, atau menghapus data alternatif.</p>
+              
+              <h5>3. Mengelola Data Penilaian</h5>
+              <p>Untuk mengelola data penilaian, klik tombol "More info" pada bagian Data Penilaian. Pastikan sudah menambahkan data kriteria sebelum mengelola data nilai</p>
+            
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 @if ($message = Session::get('success'))

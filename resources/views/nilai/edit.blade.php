@@ -40,15 +40,15 @@
                                 @endphp
                                 @foreach($kriteriaReverse as $kri)
                                     @php
-                                        $selectedCrips = $nilai->firstWhere('kriteria_id', $kri->id);
+                                        $selec = $nilai->firstWhere('kriteria_id', $kri->id);
                                     @endphp
                                     <div class="form-group">
                                         <label for="subs_kriteria_{{ $kri->id }}">{{ $kri->nama }}</label>
                                         <select name="penilaian[{{ $loop->index }}][subs_kriteria_id]" id="subs_kriteria_{{ $kri->id }}" class="form-control" required>
-                                            @foreach($kri->subsKriteria as $crip)
-                                                <option value="{{ $crip->id }}" 
-                                                    {{ $selectedCrips && $selectedCrips->subs_kriteria_id == $crip->id ? 'selected' : '' }}>
-                                                    {{ $crip->nama }}
+                                            @foreach($kri->subsKriteria as $sub)
+                                                <option value="{{ $sub->id }}" 
+                                                    {{ $selec && $selec->subs_kriteria_id == $sub->id ? 'selected' : '' }}>
+                                                    {{ $sub->nama }}
                                                 </option>
                                             @endforeach
                                         </select>

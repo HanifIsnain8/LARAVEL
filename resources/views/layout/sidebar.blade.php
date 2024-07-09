@@ -23,7 +23,7 @@
           <li class="nav-item">
             <a href="{{ route ('alternatif.index') }}" class="nav-link">
               <i class="fas fa-circle nav-icon"></i>
-              <p>ALTERNATIF</p>
+              <p>MAHASISWA</p>
             </a>
           </li>
 

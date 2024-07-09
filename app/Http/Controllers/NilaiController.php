@@ -85,16 +85,6 @@ class NilaiController extends Controller
         return redirect()->route('nilai.index')->with('success', 'Nilai berhasil diperbarui.');
     }
 
-    public function destroy($id){
-        $nilai = Nilai::find($id);
-        if ($nilai) {
-            $nilai->delete();
-            return redirect()->route('nilai.index')->with('success', 'Nilai berhasil dihapus.');
-        } else {
-            return redirect()->route('nilai.index')->with('failed', 'Nilai tidak ditemukan.');
-        }
-    }
-
     public function hasil(){
         $userId = auth()->id();
         $nilais = Nilai::where('user_id', $userId)

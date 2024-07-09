@@ -48,13 +48,6 @@
                                                 <a href="{{ route('nilai.edit', $alternatif->id) }}" class="btn btn-warning">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
-                                                <form action="{{ route('nilai.destroy', $alternatif->id) }}" method="POST" style="display:inline-block;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Anda yakin ingin menghapus nilai ini?')">
-                                                        <i class="fas fa-trash-alt"></i> Hapus
-                                                    </button>
-                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

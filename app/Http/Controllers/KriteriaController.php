@@ -8,8 +8,7 @@ use App\Models\Subs_kriteria;
 
 class KriteriaController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $userId = auth()->id();
         $kriterias = Kriteria::where('user_id', $userId)
                          ->with('subsKriteria')
@@ -17,8 +16,7 @@ class KriteriaController extends Controller
         return view('kriteria.index', compact('kriterias'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $request->validate([
             'user_id' => 'required',
             'kode' => 'required|string|max:5',
@@ -53,8 +51,7 @@ class KriteriaController extends Controller
         }
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
         $kriteria = Kriteria::find($id);
         if ($kriteria) {
             Subs_kriteria::where('kriteria_id', $kriteria->id)->delete();
@@ -65,8 +62,7 @@ class KriteriaController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $request->validate([
             'kode' => 'required|string|max:5',
             'nama' => 'required|string|max:100',
@@ -82,8 +78,7 @@ class KriteriaController extends Controller
         }
     }
 
-    public function updatesubs(Request $request, $id)
-    {
+    public function updatesubs(Request $request, $id){
         $kriteria = Kriteria::findOrFail($id);
 
 

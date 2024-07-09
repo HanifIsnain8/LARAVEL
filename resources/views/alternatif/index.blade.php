@@ -12,7 +12,7 @@
         <div class="container-fluid" style="padding-top: 20px;">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card mt-4">
                         <div class="card-header">
                             <div class="d-flex justify-content-between align-items-center mb">
                                 <div class="mx-auto text-center">
@@ -23,8 +23,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <table id="alternatifTable" class="table table-bordered  table-hover text-center">
+                        <div class="card-body table-responsive">
+                            <table id="alternatifTable" class="table table-hover text-center">
                                 <thead>
                                     <tr>
                                         <th>NO</th>
@@ -36,7 +36,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- Data akan dimuat oleh DataTables --}}
+
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -63,7 +64,7 @@
                     url: "{{ route('alternatif.index') }}",
                 },
                 columns: [
-                    { data: 'no', name: 'no' },
+                    { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                     { data: 'nama', name: 'nama' },
                     { data: 'semester', name: 'semester' },
                     { data: 'jurusan', name: 'jurusan' },

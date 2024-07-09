@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SocialAccount;
+use App\Models\Subs_kriteria;
 use App\Models\User;
 use Exception;
 use Illuminate\Auth\Events\PasswordReset;
@@ -19,13 +20,11 @@ class LoginController extends Controller
 {
 
 
-    public function index()
-    {
+    public function index(){
         return view('auth.login');
     }
     
-    public function login_proses(Request $request)
-    {   
+    public function login_proses(Request $request){   
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -45,20 +44,17 @@ class LoginController extends Controller
     }
 
     
-    public function logout()
-    {
+    public function logout(){
         Auth::logout();
         return redirect()->route('login')->with('success', 'Kamu berhasil logout');
     }
 
 
-    public function register()
-    {
+    public function register(){
         return view('auth.regis');
     }
 
-    public function register_proses(Request $request)
-    {   
+    public function register_proses(Request $request){   
         $request->validate([
             'name' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email',
@@ -78,19 +74,16 @@ class LoginController extends Controller
         return redirect('/email/verify');
     }
 
-    public function verify_notice()
-    {
+    public function verify_notice(){
         return view('auth.verify');
     }
 
-    public function verification_verify(EmailVerificationRequest $request)
-    {
+    public function verification_verify(EmailVerificationRequest $request){
         $request->fulfill();
         return redirect('/home')->with('message', 'Your email has been verified!');
     }
 
-    public function verification_send(Request $request)
-    {
+    public function verification_send(Request $request){
         $request->user()->sendEmailVerificationNotification();
         return back()->with('message', 'Verification link sent!');
     }
@@ -141,20 +134,12 @@ class LoginController extends Controller
     }
 
 
-
-
-
-
-
-    // LOGIN DENGAN SOCIAL MEDIA
-    public function redirectToProvider($provider)
-    {
+    public function redirectToProvider($provider){
         return Socialite::driver($provider)->redirect();
     }
 
 
-    public function handleProvideCallback($provider)
-    {
+    public function handleProvideCallback($provider){
         try {
             $socialUser = Socialite::driver($provider)->user();
         } catch (Exception $e) {

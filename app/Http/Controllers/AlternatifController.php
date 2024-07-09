@@ -9,15 +9,12 @@ use Yajra\DataTables\Facades\DataTables;
 
 class AlternatifController extends Controller
 {
-    public function index(Request $request)
-    {   
+    public function index(Request $request){   
         if ($request->ajax()) {
-            $alternatif = Alternatif::where('user_id', Auth::id())->latest()->get();
+            $data = Alternatif::where('user_id', Auth::id())->latest()->get();
     
-            return DataTables::of($alternatif)
-                ->addColumn('no', function ($data) {
-                    return $data->id; // atau bisa diganti dengan nomor urut lainnya
-                })
+            return DataTables::of($data)
+                ->addIndexColumn()
                 ->addColumn('nama', function ($data) {
                     return $data->nama;
                 })
@@ -32,6 +29,9 @@ class AlternatifController extends Controller
                 })
                 ->addColumn('aksi', function ($data) {
                     return '
+                        <a href="' . route('alternatif.show', $data->id) . '" class="btn btn-success">
+                            <i class="fas fa"></i> Lihat
+                        </a>
                         <a href="' . route('alternatif.edit', $data->id) . '" class="btn btn-warning">
                             <i class="fas fa-edit"></i> Edit
                         </a>
@@ -82,8 +82,7 @@ class AlternatifController extends Controller
         }
     }
 
-    public function destroy($id)
-    {
+    public function destroy($id){
         $alternatif = Alternatif::find($id);
         if ($alternatif) {
             $alternatif->delete();
@@ -93,7 +92,7 @@ class AlternatifController extends Controller
         }
     }
 
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id){
         $request->validate([
             'user_id' => 'required',
             'nama' => 'required|string|max:255',
@@ -113,5 +112,10 @@ class AlternatifController extends Controller
         } else {
             return redirect()->back()->withErrors('failed', 'Gagal.');
         }
+    }
+
+    public function show($id){
+        $alt = Alternatif::findOrFail($id);
+        return view('alternatif.detail', compact('alt'));
     }
 }

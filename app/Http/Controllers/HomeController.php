@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Alternatif;
 use App\Models\Kriteria;
+use App\Models\Nilai;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,20 +12,20 @@ use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $alt = Alternatif::where('user_id', Auth::id())->count();
         $kri = Kriteria::where('user_id', Auth::id())->count();
-        return view('dashboard', compact('alt', 'kri'));
+        $nilai = Alternatif::whereHas('nilai', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->count();
+        return view('dashboard', compact('alt', 'kri','nilai'));
     }
 
-    public function profile()
-    {
+    public function profile(){
         return view('auth.profile');
     }
 
-    public function changePassword(Request $request)
-    {
+    public function changePassword(Request $request){
         $request->validate([
             'current_password' => 'required',
             'new_password' => 'required|min:8|confirmed',

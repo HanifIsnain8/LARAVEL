@@ -13,6 +13,32 @@
         <div class="container-fluid" style="padding-top: 20px;">
             <div class="row">
                 <div class="col-12">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="mx-auto text-center">
+                                <h2>PEMBAGI</h2>
+                            </div>
+                        </div>
+                        <div class="card-body table-responsive">
+                            <table id="pembagi" class="table table-hover text-center">
+                                <thead>
+                                    <tr>
+                                        <th>KRITERIA</th>
+                                        @foreach($kriterias as $kriteria)
+                                            <th>{{ $kriteria->kode }}</th>
+                                        @endforeach
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <th>PEMBAGI</th>
+                                    @foreach($kriterias as $kriteria)
+                                        <td>{{ isset($divider[$kriteria->id]) ? $divider[$kriteria->id]  : '-' }}</td>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 
                     <!-- Normalisasi -->
                     <div class="card">
@@ -165,6 +191,7 @@
     <script src="AdminLTE/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
     <script>
         $(document).ready( function () {
+            $('#pembagi').DataTable();
             $('#normalisasi').DataTable();
             $('#terbobot').DataTable();
             $('#ideal').DataTable();

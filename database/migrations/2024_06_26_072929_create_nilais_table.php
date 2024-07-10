@@ -20,9 +20,9 @@ return new class extends Migration
             $table->integer('nilai');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('alternatif_id')->references('id')->on('alternatifs');
-            $table->foreign('kriteria_id')->references('id')->on('kriterias');
-            $table->foreign('subs_kriteria_id')->references('id')->on('subs_kriterias');
+            $table->foreign('alternatif_id')->references('id')->on('alternatifs')->onDelete('cascade');
+            $table->foreign('kriteria_id')->references('id')->on('kriterias')->onDelete('cascade');
+            $table->foreign('subs_kriteria_id')->references('id')->on('subs_kriterias')->onDelete('cascade');
         });
     }
 

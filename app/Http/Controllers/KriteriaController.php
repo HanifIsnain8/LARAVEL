@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kriteria;
+use App\Models\Nilai;
 use App\Models\Subs_kriteria;
 
 class KriteriaController extends Controller
@@ -54,7 +55,11 @@ class KriteriaController extends Controller
     public function destroy($id){
         $kriteria = Kriteria::find($id);
         if ($kriteria) {
-            Subs_kriteria::where('kriteria_id', $kriteria->id)->delete();
+            $subsKriterias = Subs_Kriteria::where('kriteria_id', $kriteria->id)->get();
+            foreach ($subsKriterias as $subsKriteria) {
+                Nilai::where('subs_kriteria_id', $subsKriteria->id)->delete();
+            }
+            Subs_Kriteria::where('kriteria_id', $kriteria->id)->delete();
             $kriteria->delete();
             return redirect()->route('kriteria.index')->with('success', 'Kriteria berhasil dihapus.');
         } else {

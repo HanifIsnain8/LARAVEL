@@ -19,6 +19,8 @@
                                 </a>
                             </div>
                         </div>
+                        
+                        <p>Note : Sebelum memulai input nilai pastikan bahwa semua kriteria telah di tambahkan</p>
                         <div class="card-body table-responsive p-0">
                             <table id="" class="table table-hover text-center">
                                 <thead>
@@ -48,6 +50,13 @@
                                                 <a href="{{ route('nilai.edit', $alternatif->id) }}" class="btn btn-warning">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
+                                                <form action="{{ route('nilai.destroy', $alternatif->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Anda yakin ingin menghapus data ini?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -55,11 +64,10 @@
                             </table>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
     </section>  
 </div>
+
 @endsection

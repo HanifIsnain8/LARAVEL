@@ -93,7 +93,7 @@
               <p>Untuk mengelola data alternatif, klik tombol "More info" pada bagian Data Alternatif. Anda akan diarahkan ke halaman pengelolaan data alternatif di mana Anda bisa menambahkan, mengedit, atau menghapus data alternatif.</p>
               
               <h5>3. Mengelola Data Penilaian</h5>
-              <p>Untuk mengelola data penilaian, klik tombol "More info" pada bagian Data Penilaian. Pastikan sudah menambahkan data kriteria sebelum mengelola data nilai</p>
+              <p>Untuk mengelola data penilaian, klik tombol "More info" pada bagian Data Penilaian. Pastikan sudah menambahkan data kriteria sebelum mengelola data nilai.</p>
             
             </div>
             <!-- /.card-body -->

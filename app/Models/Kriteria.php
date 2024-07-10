@@ -16,6 +16,10 @@ class Kriteria extends Model
         'bobot',
         'tipe_kriteria',
     ];
+    
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 
     public function subsKriteria()
     {
